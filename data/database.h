@@ -9,5 +9,5 @@ public:
     CDatabase(bool bInstaConnect = true);
     ~CDatabase();
 private:
-    QSqlDatabase db;
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 };

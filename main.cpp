@@ -1,4 +1,3 @@
-#include <QtWidgets/QApplication>
 #include <QWindow>
 #include "windows/regwindow.h"
 #include "windows/mainwindow.h"
@@ -10,10 +9,12 @@
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
-    RegWindow regwnd;
+
     mainWindow mainwnd;
+    RegWindow regwnd;
     CDatabase data;
-    
+
+    regwnd.show();
     
     
 

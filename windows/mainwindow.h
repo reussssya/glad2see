@@ -1,8 +1,7 @@
-#include <QWindow>
 #include "../common.h"
 
 
-class mainWindow : public QWindow
+class mainWindow : public QWidget
 {
 public:
     mainWindow();

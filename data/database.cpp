@@ -4,7 +4,6 @@ CDatabase::CDatabase(bool bInstaConnect)
 {
     if(bInstaConnect)
     {
-        db = QSqlDatabase::addDatabase("QMYSQL");
         db.setHostName("127.0.0.1");
         db.setUserName("root");
         db.setPassword("");
@@ -18,7 +17,7 @@ CDatabase::CDatabase(bool bInstaConnect)
             /*QString name = "reussssya";
             QString giftcode = "abcd";
 
-
+            
             QSqlQuery query;
 
             query.prepare("INSERT INTO users (name, giftcode) VALUES (:name, :giftcode)");
