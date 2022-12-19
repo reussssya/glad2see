@@ -9,7 +9,7 @@ CDatabase::CDatabase(bool bInstaConnect)
         db.setUserName("root");
         db.setPassword("");
         db.setDatabaseName("glad2see");
-
+        
         if(db.open())
         {
             qDebug() << "Connected to database!";

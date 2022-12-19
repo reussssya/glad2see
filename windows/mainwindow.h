@@ -2,7 +2,7 @@
 #include "../common.h"
 
 
-class mainWindow : public QWindow, public QSize
+class mainWindow : public QWindow
 {
 public:
     mainWindow();
