@@ -1,5 +1,6 @@
 #pragma once
 
+
 #include <QString>
 #include <QSize>
 #include <QDebug>
@@ -14,3 +15,6 @@
 #include <QApplication>
 #include <QListWidget>
 #include <string>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QtSql>

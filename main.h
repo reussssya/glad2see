@@ -1,3 +1,3 @@
-#pragma once
+#include "common.h"
 
-extern bool bRegistered = true;
+

@@ -1,14 +1,16 @@
-#include "regwindow.h"
+#include "joinwindow.h"
 #include "../common.h"
+#include "../data/database.h"
+#include "../main.h"
 
-void RegWindow::checkUser()
+void CJoinWindow::clicked_onJoin()
 {
-    QString name = leUser->text();
-    std::cout << name.toStdString();
+    QString enteredUsername = leUser->text();
+    QString enteredCode = leCode->text();
+
 }
 
-
-RegWindow::RegWindow(QWidget *parent) : QWidget(parent)
+CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
 {
     this->setFixedSize(weight, height);
     this->setWindowTitle(labels[0]);
@@ -42,14 +44,14 @@ RegWindow::RegWindow(QWidget *parent) : QWidget(parent)
     quit->setGeometry(20, 70, 70, 25);
 
     connect(quit, &QPushButton::clicked, this, &QApplication::quit);
-    connect(enter, &QPushButton::clicked, this, &RegWindow::checkUser);
+    connect(enter, &QPushButton::clicked, this, &CJoinWindow::clicked_onJoin);
 
 
 
 
     setLayout(grid);
 }
-RegWindow::~RegWindow()
+CJoinWindow::~CJoinWindow()
 {
 
 }

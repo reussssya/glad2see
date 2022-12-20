@@ -14,22 +14,27 @@ CDatabase::CDatabase(bool bInstaConnect)
             qDebug() << "Connected to database!";
             // TESTING
 
-            /*QString name = "reussssya";
+            QString name = "reussssya";
             QString giftcode = "abcd";
 
             
-            QSqlQuery query;
+            QSqlQuery query(db);
+            query.prepare("SELECT id FROM users WHERE name = :name");
+            //query.prepare("INSERT INTO users (name, giftcode) VALUES (:name, :giftcode)");
+            query.bindValue(":name", user);
+            //query.bindValue(":giftcode", code);
 
-            query.prepare("INSERT INTO users (name, giftcode) VALUES (:name, :giftcode)");
-            query.bindValue(":name", name);
-            query.bindValue(":giftcode", giftcode);
-
-            if(query.exec())
+            if(!query.exec())
             {
-                qDebug() << "here we go";
-            } else {
                 qDebug() << "unfortunately cant insert data";
-            }*/
+            } else {
+                while(query.next())
+                {
+                    QString id = query.value(0).toString();
+                    qDebug() << "here we go" << id;
+                }
+                
+            }
             //WORKS NICE
             
 

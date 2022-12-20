@@ -18,13 +18,12 @@ find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
 
 add_executable(glad2see
     data/database.cpp
-    data/database.h
+    #data/database.h
     windows/mainwindow.cpp
-    windows/mainwindow.h
-    windows/regwindow.h
-    windows/regwindow.cpp
+    #windows/mainwindow.h
+    #windows/joinwindow.h
+    windows/joinwindow.cpp
     main.cpp
-    main.h
     common.h
 )
 

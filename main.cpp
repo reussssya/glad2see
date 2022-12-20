@@ -1,5 +1,5 @@
 #include <QWindow>
-#include "windows/regwindow.h"
+#include "windows/joinwindow.h"
 #include "windows/mainwindow.h"
 #include "common.h"
 #include "main.h"
@@ -11,10 +11,10 @@ int main(int argc, char* argv[])
     QApplication a(argc, argv);
 
     mainWindow mainwnd;
-    RegWindow regwnd;
+    CJoinWindow jwnd;
     CDatabase data;
 
-    regwnd.show();
+    jwnd.show();
     
     
 
