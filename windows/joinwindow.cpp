@@ -3,11 +3,61 @@
 #include "../data/database.h"
 #include "../main.h"
 
+
 void CJoinWindow::clicked_onJoin()
 {
-    QString enteredUsername = leUser->text();
-    QString enteredCode = leCode->text();
+    // got user & code
+    //userspace::qUser = leUser->text();
+    //userspace::qCode = leCode->text();
 
+    // query to check if user exist
+    QSqlQuery q;
+    q.prepare("SELECT id FROM users WHERE name = :name");
+    //query.prepare("INSERT INTO users (name, giftcode) VALUES (:name, :giftcode)");
+    q.bindValue(":name", leUser->text());
+    //query.bindValue(":giftcode", code);
+
+    if(!q.exec())
+    {
+        qDebug() << "Can't execute the query";
+    }
+    else
+    {
+        if(!q.next()) QMessageBox::warning(this, "glad2see - failed authorization", "Please, contact to vk.com/reussssya if you already don't have an account\
+                                                   Or try again..."); // if there no account in db do sth                    
+    }
+
+    q.clear();
+    q.finish();
+
+    q.prepare("SELECT giftcode FROM users WHERE name = :name");
+    q.bindValue(":name", leUser->text());
+    if(!q.exec()) qDebug() << "cant exec";
+    while(q.next())
+    {
+        QString receivedCode = q.value(0).toString();
+        if(receivedCode == leCode->text())
+        {
+            this->close();
+            QMessageBox::information(this, "glad2see - you are welcome", "Successfuly joined in your account\nEnjoy...");
+        }
+        else
+        {
+            QMessageBox::warning(this, "glad2see - failed authorization", "Please, contact to vk.com/reussssya if you forgot the password\
+                                                   Or try again..."); // if there no account in db do sth
+        }
+    }
+
+    /*QSqlQuery qr;
+    qr.prepare("SELECT giftcode FROM users WHERE name = :name");
+    qr.bindValue(":name", userspace::qUser);
+    qr.exec();
+
+    while(qr.next())
+    {
+        qDebug() << qr.value(0).toString();
+    }*/
+    
 }
 
 CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
@@ -51,6 +101,7 @@ CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
 
     setLayout(grid);
 }
+
 CJoinWindow::~CJoinWindow()
 {
 

@@ -3,12 +3,9 @@
 #define         WND_W_SIZE          600
 #define         WND_H_SIZE          400
 
-mainWindow::mainWindow()
+mainWindow::mainWindow(QMainWindow *parent) : QMainWindow(parent)
 {
-    window.setFlags(flags);
-    window.resize(WND_W_SIZE, WND_H_SIZE);
-    window.setTitle(title);
-    window.show();
+    this->setFixedSize(600,400);
 }
 
 mainWindow::~mainWindow()

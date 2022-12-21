@@ -18,3 +18,4 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QtSql>
+#include <QThread>

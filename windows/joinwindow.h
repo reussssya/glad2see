@@ -1,5 +1,6 @@
 #include "../common.h"
 
+
 class CJoinWindow : public QWidget
 {
     Q_OBJECT
