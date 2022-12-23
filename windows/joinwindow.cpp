@@ -1,21 +1,14 @@
 #include "joinwindow.h"
+
 #include "../common.h"
 #include "../data/database.h"
-#include "../main.h"
 
 
 void CJoinWindow::clicked_onJoin()
 {
-    // got user & code
-    //userspace::qUser = leUser->text();
-    //userspace::qCode = leCode->text();
-
-    // query to check if user exist
     QSqlQuery q;
     q.prepare("SELECT id FROM users WHERE name = :name");
-    //query.prepare("INSERT INTO users (name, giftcode) VALUES (:name, :giftcode)");
     q.bindValue(":name", leUser->text());
-    //query.bindValue(":giftcode", code);
 
     if(!q.exec())
     {
@@ -29,17 +22,23 @@ void CJoinWindow::clicked_onJoin()
 
     q.clear();
     q.finish();
-
     q.prepare("SELECT giftcode FROM users WHERE name = :name");
     q.bindValue(":name", leUser->text());
-    if(!q.exec()) qDebug() << "cant exec";
+
+    if(!q.exec()) qDebug() << "Can't execute the query";
+
     while(q.next())
     {
         QString receivedCode = q.value(0).toString();
         if(receivedCode == leCode->text())
         {
-            this->close();
+            QSettings registry(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
+            registry.setValue("bIsAuthed", 1);
+
             QMessageBox::information(this, "glad2see - you are welcome", "Successfuly joined in your account\nEnjoy...");
+            this->setAttribute(Qt::WA_QuitOnClose, false);
+            this->close();
+            emit firstWindow();
         }
         else
         {
@@ -47,16 +46,6 @@ void CJoinWindow::clicked_onJoin()
                                                    Or try again..."); // if there no account in db do sth
         }
     }
-
-    /*QSqlQuery qr;
-    qr.prepare("SELECT giftcode FROM users WHERE name = :name");
-    qr.bindValue(":name", userspace::qUser);
-    qr.exec();
-
-    while(qr.next())
-    {
-        qDebug() << qr.value(0).toString();
-    }*/
     
 }
 
@@ -65,7 +54,7 @@ CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
     this->setFixedSize(weight, height);
     this->setWindowTitle(labels[0]);
     this->setWindowFlags(flags);
-
+    
 
     QLabel *user = new QLabel("Identificator:", this);
     user->setAlignment(Qt::AlignRight);
@@ -98,8 +87,9 @@ CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
 
 
 
-
+    
     setLayout(grid);
+    this->show();
 }
 
 CJoinWindow::~CJoinWindow()

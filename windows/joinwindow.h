@@ -1,14 +1,29 @@
+#pragma once
+
 #include "../common.h"
 
 
 class CJoinWindow : public QWidget
 {
     Q_OBJECT
-
 public:
     CJoinWindow(QWidget *parent = 0);
     ~CJoinWindow();
 
+signals:
+    void firstWindow();
+protected:
+
+    void closeEvent(QCloseEvent *event) override 
+    {
+
+        if (event->spontaneous()) {
+            qDebug("The close button was clicked");
+            // do event->ignore();
+        } else {
+            QWidget::closeEvent(event);
+        }
+    }
 
 private slots:
     void clicked_onJoin();

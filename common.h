@@ -1,11 +1,12 @@
 #pragma once
 
+#include <string>
+#include <Windows.h>
 
 #include <QString>
 #include <QSize>
 #include <QDebug>
 #include <QMessageBox>
-#include <iostream>
 #include <QLabel>
 #include <QWindow>
 #include <QWidget>
@@ -14,8 +15,9 @@
 #include <QPushButton>
 #include <QApplication>
 #include <QListWidget>
-#include <string>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QtSql>
 #include <QThread>
+#include <QCloseEvent>
+#include <QSettings>
