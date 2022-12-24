@@ -22,11 +22,11 @@ void CJoinWindow::clicked_onJoin()
 
     q.clear();
     q.finish();
+
     q.prepare("SELECT giftcode FROM users WHERE name = :name");
     q.bindValue(":name", leUser->text());
 
     if(!q.exec()) qDebug() << "Can't execute the query";
-
     while(q.next())
     {
         QString receivedCode = q.value(0).toString();
@@ -36,11 +36,11 @@ void CJoinWindow::clicked_onJoin()
             registry.setValue("bIsAuthed", 1);
 
             QMessageBox::information(this, "glad2see - you are welcome", "Successfuly joined in your account\nEnjoy...");
-            this->setAttribute(Qt::WA_QuitOnClose, false);
+            //this->setAttribute(Qt::WA_QuitOnClose, false);
+            emit exec_mainWindow();
             this->close();
-            emit firstWindow();
         }
-        else
+        else if(receivedCode != leCode->text())
         {
             QMessageBox::warning(this, "glad2see - failed authorization", "Please, contact to vk.com/reussssya if you forgot the password\
                                                    Or try again..."); // if there no account in db do sth
@@ -82,14 +82,14 @@ CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
     enter->setGeometry(185, 70, 70, 25);
     quit->setGeometry(20, 70, 70, 25);
 
-    connect(quit, &QPushButton::clicked, this, &QApplication::quit);
+    connect(quit, &QPushButton::clicked, this, &CJoinWindow::close);
     connect(enter, &QPushButton::clicked, this, &CJoinWindow::clicked_onJoin);
 
 
 
     
     setLayout(grid);
-    this->show();
+
 }
 
 CJoinWindow::~CJoinWindow()

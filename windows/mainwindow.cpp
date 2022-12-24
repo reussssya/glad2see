@@ -8,9 +8,11 @@ mainWindow::mainWindow(QMainWindow *parent) : QMainWindow(parent)
     this->setFixedSize(600,400);
     //this->close();
 
-    jwnd = new CJoinWindow();
+    jwnd = new CJoinWindow;
+    jwnd->show();
+    connect(jwnd, &CJoinWindow::exec_mainWindow, this, &mainWindow::show);
+    this->close();
 
-    connect(jwnd, &CJoinWindow::firstWindow, this, &mainWindow::show);
 }
 
 mainWindow::~mainWindow()

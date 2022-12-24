@@ -12,6 +12,7 @@ int main(int argc, char* argv[])
     CDatabase data;
     CJoinWindow jwnd;
     mainWindow mwnd;
+
     QSettings *registry = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
     registry->setValue("bIsAuthed", 0);
 

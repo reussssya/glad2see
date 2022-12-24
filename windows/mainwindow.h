@@ -10,9 +10,6 @@ public:
     mainWindow(QMainWindow* parent = 0);
     ~mainWindow();
 
-private slots:
-    bool process_onJoin();
-
 private:
 
     CJoinWindow *jwnd;

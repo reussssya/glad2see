@@ -11,19 +11,7 @@ public:
     ~CJoinWindow();
 
 signals:
-    void firstWindow();
-protected:
-
-    void closeEvent(QCloseEvent *event) override 
-    {
-
-        if (event->spontaneous()) {
-            qDebug("The close button was clicked");
-            // do event->ignore();
-        } else {
-            QWidget::closeEvent(event);
-        }
-    }
+    void exec_mainWindow();
 
 private slots:
     void clicked_onJoin();
