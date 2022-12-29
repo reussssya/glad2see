@@ -4,11 +4,11 @@
 #include <QMainWindow>
 #include "joinwindow.h"
 
-class mainWindow : public QMainWindow
+class CMainWindow : public QMainWindow
 {
 public:
-    mainWindow(QMainWindow* parent = 0);
-    ~mainWindow();
+    CMainWindow(QMainWindow* parent = 0);
+    ~CMainWindow();
 
 private:
 
