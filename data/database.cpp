@@ -1,9 +1,9 @@
 #include "database.h"
 
 
-CDatabase::CDatabase(bool bInstaConnect)
+CDatabase::CDatabase(bool bLocalConnect)
 {
-    if(bInstaConnect)
+    if(bLocalConnect)
     {
         db.setHostName("127.0.0.1");
         db.setUserName("root");
@@ -18,6 +18,10 @@ CDatabase::CDatabase(bool bInstaConnect)
         {
             qDebug() << "Can't connect to database!";
         }
+    }
+    else
+    {
+        // release 
     }
     
 }

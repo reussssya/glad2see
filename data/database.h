@@ -7,10 +7,10 @@ class CDatabase
 {
 
 public:
-    CDatabase(bool bInstaConnect = true);
+    CDatabase(bool bLocalConnect = true);
     ~CDatabase();
 
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+    
 private:
-
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 };

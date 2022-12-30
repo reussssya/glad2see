@@ -9,9 +9,9 @@ int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
 
-    CDatabase data;
-    CJoinWindow jwnd;
-    CMainWindow mwnd;
+    CDatabase data(true);
+    CJoinWindow jWnd;
+    CMainWindow mWnd;
 
 
     
