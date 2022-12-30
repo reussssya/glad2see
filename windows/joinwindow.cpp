@@ -49,47 +49,85 @@ void CJoinWindow::clicked_onJoin()
     
 }
 
+void CJoinWindow::applyCustomDesign()
+{
+    this->setFixedSize(width, height);
+    this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    this->setParent(0);
+    // background 
+    QPixmap bkgnd("data/img/JoinWindow.png");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+
+    QPalette palette;
+    palette.setBrush(QPalette::Window, bkgnd);
+
+    this->setPalette(palette);
+
+    // round window's corners
+
+    QPainterPath painPath;
+    painPath.addRoundedRect(rect(), 5, 5, Qt::AbsoluteSize);
+    this->setMask(painPath.toFillPolygon().toPolygon());
+
+}
+
+void CJoinWindow::pressed_quitButton()
+{
+    quit->setStyleSheet("border-image:url(data/img/quitButtonFinalPressed.png);");
+}
+
+void CJoinWindow::pressed_joinButton()
+{
+    enter->setStyleSheet("border-image:url(data/img/joinButtonFinalPressed.png);");
+}
+
 CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
 {
-    this->setFixedSize(weight, height);
-    this->setWindowTitle(labels[0]);
-    this->setWindowFlags(flags);
+    applyCustomDesign();
+
+    user->setPixmap(QPixmap("data/img/IDENTIFICATOR.png"));
+    code->setPixmap(QPixmap("data/img/CODE.png"));
+    joinWithUs->setPixmap(QPixmap("data/img/joinWithUs.png"));
     
+    leUser->setStyleSheet("font: 13pt 'Inter';"
+                        "color: #0A0A16;"
+                        "background-color: #D9D9D9;"
+                        "selection-color: #0A0A16;"
+                        "border-radius: 5px;");
+    leUser->setFixedHeight(35);
 
-    QLabel *user = new QLabel("Identificator:", this);
-    user->setAlignment(Qt::AlignRight);
+    leCode->setStyleSheet("font: 13pt 'Inter';"
+                        "color: #0A0A16;"
+                        "background-color: #D9D9D9;"
+                        "selection-color: #0A0A16;"
+                        "border-radius: 5px;");
+    leCode->setFixedHeight(35);
 
-    QLabel *code = new QLabel("Code:", this);
-    code->setAlignment(Qt::AlignRight);
+
+
+    enter->setStyleSheet("QPushButton { border-image:url(data/img/joinButtonFinal.png); }"
+                        "QPushButton:pressed { border-image:url(data/img/joinButtonFinalPressed.png); }");
+
+    quit->setStyleSheet("QPushButton { border-image:url(data/img/quitButtonFinal.png); }"
+                        "QPushButton:pressed { border-image:url(data/img/quitButtonFinalPressed.png); }");
+
+
+    joinWithUs->setGeometry(150,7,99,17);
     
+    user->setGeometry(27,46, 148,23);
+    code->setGeometry(117,98, 58,19);
 
-    leUser->setFixedHeight(22);
-    leCode->setFixedHeight(22);
+    leUser->setGeometry(190,40,190,35);
+    leCode->setGeometry(190,90,190,35);
 
-    QGridLayout *grid = new QGridLayout(); 
-    
-
-
-    grid->addWidget(user, 0, 0);
-    grid->addWidget(code, 1, 0);
-
-    grid->addWidget(leUser, 0,1);
-    grid->addWidget(leCode, 1, 1);
-    
-    grid->setRowStretch(2,2);
+    enter->setGeometry(325, 160, 65, 25);
+    quit->setGeometry(15, 160, 65, 25);
 
 
-    enter->setGeometry(185, 70, 70, 25);
-    quit->setGeometry(20, 70, 70, 25);
-
+    //connect(quit, &QPushButton::pressed, this, &CJoinWindow::pressed_quitButton);
+    //connect(quit, &QPushButton::, this, &CJoinWindow::applyCustomDesign);
     connect(quit, &QPushButton::clicked, this, &CJoinWindow::close);
     connect(enter, &QPushButton::clicked, this, &CJoinWindow::clicked_onJoin);
-
-
-
-    
-    setLayout(grid);
-
 }
 
 CJoinWindow::~CJoinWindow()

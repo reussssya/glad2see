@@ -13,9 +13,6 @@ int main(int argc, char* argv[])
     CJoinWindow jwnd;
     CMainWindow mwnd;
 
-    QSettings *registry = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
-    registry->setValue("bIsAuthed", 0);
-
 
     
     

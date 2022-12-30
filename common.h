@@ -21,3 +21,5 @@
 #include <QThread>
 #include <QCloseEvent>
 #include <QSettings>
+#include <QPixmap>
+#include <QPainterPath>

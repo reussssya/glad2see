@@ -6,6 +6,7 @@
 class CJoinWindow : public QWidget
 {
     Q_OBJECT
+
 public:
     CJoinWindow(QWidget *parent = 0);
     ~CJoinWindow();
@@ -15,12 +16,14 @@ signals:
 
 private slots:
     void clicked_onJoin();
+    void pressed_quitButton();
+    void pressed_joinButton();
 
 private:
-    Qt::WindowFlags flags = Qt::Window | Qt::WindowCloseButtonHint | Qt::MSWindowsFixedSizeDialogHint | Qt::WindowMinimizeButtonHint;
+    void applyCustomDesign();
 
-    int weight = 275;
-    int height = 100;
+    int width = 400;
+    int height = 200;
 
     QVector<QString> labels {
         "glad2see - join with us",
@@ -32,6 +35,11 @@ private:
     QLineEdit *leUser = new QLineEdit(this);
     QLineEdit *leCode = new QLineEdit(this);
 
-    QPushButton *enter = new QPushButton(labels[2], this);
-    QPushButton *quit = new QPushButton(labels[3], this);
+    QLabel *user = new QLabel(this);
+    QLabel *code = new QLabel(this);
+    QLabel *joinWithUs = new QLabel(this);
+
+
+    QPushButton *enter = new QPushButton(/*labels[2], */this);
+    QPushButton *quit = new QPushButton(/*labels[3], */this);
 };
