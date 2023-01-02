@@ -8,8 +8,10 @@
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
+    
+    bool bConnectDatabase = true;
 
-    CDatabase data(true);
+    CDatabase data(bConnectDatabase);
     CJoinWindow jWnd;
     CMainWindow mWnd;
 

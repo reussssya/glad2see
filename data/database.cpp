@@ -21,7 +21,8 @@ CDatabase::CDatabase(bool bLocalConnect)
     }
     else
     {
-        // release 
+        // release
+        
     }
     
 }
