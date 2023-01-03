@@ -4,6 +4,9 @@
 #include "../data/database.h"
 
 
+#define         JOINWND_W_SIZE          400
+#define         JOINWND_H_SIZE          200
+
 void CJoinWindow::clicked_onJoin()
 {
     QSqlQuery q;
@@ -49,11 +52,14 @@ void CJoinWindow::clicked_onJoin()
     
 }
 
+
 void CJoinWindow::applyCustomDesign()
 {
-    this->setFixedSize(width, height);
+    this->setWindowIcon(QIcon("data/img/joinIcon.png"));
+
+    this->setFixedSize(JOINWND_W_SIZE, JOINWND_H_SIZE);
     this->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    this->setParent(0);
+
     // background 
     QPixmap bkgnd("data/img/JoinWindow.png");
     bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);

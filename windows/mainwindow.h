@@ -10,7 +10,23 @@ public:
     CMainWindow(QMainWindow* parent = 0);
     ~CMainWindow();
 
+    void mousePressEvent(QMouseEvent *event)
+    {
+        if (event->buttons().testFlag(Qt::LeftButton))
+        {
+            HWND hWnd = ::GetAncestor((HWND)(window()->windowHandle()->winId()), GA_ROOT);
+            POINT pt;
+            ::GetCursorPos(&pt);
+            ::ReleaseCapture();
+            ::SendMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, POINTTOPOINTS(pt));
+        }
+    }
+
 private:
+    void applyCustomDesign();
+
+    
+
 
     CJoinWindow *jwnd;
 
