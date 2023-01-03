@@ -112,7 +112,7 @@ CJoinWindow::CJoinWindow(QWidget *parent) : QWidget(parent)
                         "QPushButton:pressed { border-image:url(data/img/quitButtonFinalPressed.png); }");
 
 
-    joinWithUs->setGeometry(150,7,99,17);
+    joinWithUs->setGeometry(145,10,110,20);
     
     user->setGeometry(27,46, 148,23);
     code->setGeometry(117,98, 58,19);
