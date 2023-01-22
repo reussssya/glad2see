@@ -21,12 +21,11 @@ public:
             ::SendMessage(hWnd, WM_NCLBUTTONDOWN, HTCAPTION, POINTTOPOINTS(pt));
         }
     }
-
 private:
     void applyCustomDesign();
-
+    bool bSubscriptionCheck();
     
-
+    QSettings* qs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
 
     CJoinWindow *jwnd;
 

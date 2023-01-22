@@ -6,7 +6,6 @@
 class CJoinWindow : public QWidget
 {
     Q_OBJECT
-
 public:
     CJoinWindow(QWidget *parent = 0);
     ~CJoinWindow();

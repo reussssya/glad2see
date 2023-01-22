@@ -23,3 +23,9 @@
 #include <QSettings>
 #include <QPixmap>
 #include <QPainterPath>
+#include <sys/types.h>
+
+
+inline QString gLogin;
+inline int gSubscripted, gSubtime;
+

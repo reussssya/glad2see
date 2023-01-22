@@ -1,30 +1,21 @@
 #include "database.h"
 
 
-CDatabase::CDatabase(bool bLocalConnect)
+CDatabase::CDatabase()
 {
-    if(bLocalConnect)
+    db.setHostName("127.0.0.1");
+    db.setUserName("root");
+    db.setPassword("");
+    db.setDatabaseName("glad2see");
+    
+    if(db.open())
     {
-        db.setHostName("127.0.0.1");
-        db.setUserName("root");
-        db.setPassword("");
-        db.setDatabaseName("glad2see");
-        
-        if(db.open())
-        {
-            qDebug() << "Connected to database!";
-        }
-        else
-        {
-            qDebug() << "Can't connect to database!";
-        }
+        qDebug() << "Connected to database!";
     }
     else
     {
-        // release
-        
+        qDebug() << "error cant connect to db";
     }
-    
 }
 
 CDatabase::~CDatabase()

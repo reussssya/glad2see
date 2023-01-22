@@ -1,20 +1,15 @@
-cmake_minimum_required(VERSION 3.1.0)
-
-project(glad2see VERSION 1.0.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.10.0)
 
 set(Qt5_DIR C:/QtForVs/5.15.2/msvc2019_64/lib/cmake/Qt5)
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(Protobuf REQUIRED)
 
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-if(CMAKE_VERSION VERSION_LESS "3.7.0")
-    set(CMAKE_INCLUDE_CURRENT_DIR ON)
-endif()
 
 find_package(Qt5 COMPONENTS Widgets Sql REQUIRED)
+
+include_directories(${Protobuf_INCLUDE_DIRS})
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS rustapi/includes/proto/rustplus.proto)
 
 add_executable(glad2see
     data/database.cpp
@@ -24,7 +19,10 @@ add_executable(glad2see
     #windows/joinwindow.h
     windows/joinwindow.cpp
     main.cpp
+    rustapi/rustplus.cpp
     common.h
+    ${PROTO_SRCS} 
+    ${PROTO_HDRS}
 )
-
-target_link_libraries(glad2see Qt5::Widgets Qt5::Sql)
+target_compile_features(glad2see PRIVATE cxx_std_17)
+target_link_libraries(glad2see Qt5::Widgets Qt5::Sql ${Protobuf_LIBRARIES})

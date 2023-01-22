@@ -1,6 +1,4 @@
 #include "joinwindow.h"
-
-#include "../common.h"
 #include "../data/database.h"
 
 
@@ -12,7 +10,6 @@ void CJoinWindow::clicked_onJoin()
     QSqlQuery q;
     q.prepare("SELECT id FROM users WHERE name = :name");
     q.bindValue(":name", leUser->text());
-
     if(!q.exec())
     {
         qDebug() << "Can't execute the query";
@@ -37,9 +34,11 @@ void CJoinWindow::clicked_onJoin()
         {
             QSettings registry(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
             registry.setValue("bIsAuthed", 1);
-
+            registry.setValue("user", leUser->text());
             QMessageBox::information(this, "glad2see - you are welcome", "Successfuly joined in your account\nEnjoy...");
             //this->setAttribute(Qt::WA_QuitOnClose, false);
+
+
             emit exec_mainWindow();
             this->close();
         }

@@ -7,7 +7,7 @@ class CDatabase
 {
 
 public:
-    CDatabase(bool bLocalConnect = true);
+    CDatabase();
     ~CDatabase();
 
     
