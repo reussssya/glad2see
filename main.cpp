@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 
     CDatabase data;
     
-    CJoinWindow jWnd;
+
     CMainWindow mWnd;
     
     
