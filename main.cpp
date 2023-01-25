@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     
     CJoinWindow jWnd;
     CMainWindow mWnd;
-
+    
     
     
     return a.exec();

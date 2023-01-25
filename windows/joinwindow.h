@@ -29,8 +29,6 @@ signals:
 
 private slots:
     void clicked_onJoin();
-    void pressed_quitButton();
-    void pressed_joinButton();
 
 private:
     void applyCustomDesign();
