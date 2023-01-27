@@ -7,6 +7,7 @@ inline bool is_return(const char& input)
 {
     return input == '\n' || input == '\r';
 }
+
 std::string getLastLine (const std::string& input)
 {
     if(input.length() == 1) return input;
@@ -38,7 +39,7 @@ void RustPlusSocket::sendTeamMessage(const char* message)
 	request.mutable_sendteammessage()->CopyFrom(msg);
 	ws->sendBinary(request.SerializeAsString());
 	AppMessage appMessage;
-	ws->poll();
+	//ws->poll();
 	ws->dispatch([&](const std::string& message) { appMessage.ParseFromString(message); });
 
 }

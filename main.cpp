@@ -1,6 +1,6 @@
 #include "main.h"
-#include "windows/joinwindow.h"
 #include "windows/mainwindow.h"
+#include "windows/joinwindow.h"
 #include "common.h"
 #include "data/database.h"
 #include "rustapi/rustplus.h"
@@ -11,9 +11,9 @@ int main(int argc, char* argv[])
 
     CDatabase data;
     
-
-    CMainWindow mWnd;
     
+    CMainWindow mWnd;
+    RustPlusSocket rps;
     
     
     return a.exec();

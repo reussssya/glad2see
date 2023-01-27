@@ -33,7 +33,7 @@ void CJoinWindow::clicked_onJoin()
         if(receivedCode == leCode->text())
         {
             QSettings registry(QSettings::NativeFormat,QSettings::UserScope,"glad2see","g2s");
-            registry.setValue("bIsAuthed", 0);
+            registry.setValue("bIsAuthed", 1);
             registry.setValue("user", leUser->text());
             QMessageBox::information(this, "glad2see - you are welcome", "Successfuly joined in your account\nEnjoy...");
             //this->setAttribute(Qt::WA_QuitOnClose, false);

@@ -21,6 +21,7 @@ add_executable(glad2see
     main.cpp
     rustapi/rustplus.cpp
     common.h
+    rustapi/includes/easyws/easywsclient.cpp
     ${PROTO_SRCS} 
     ${PROTO_HDRS}
 )
