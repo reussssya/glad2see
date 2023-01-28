@@ -13,8 +13,13 @@ int main(int argc, char* argv[])
     
     
     CMainWindow mWnd;
-    RustPlusSocket rps;
+
+    RustPlusSocket rs;
     
+        
+    
+	
+	Sleep(1000.f);
     
     return a.exec();
 }

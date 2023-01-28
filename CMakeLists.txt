@@ -9,7 +9,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Widgets Sql Quick Gui REQUIRED)
 
 include_directories(${Protobuf_INCLUDE_DIRS})
-protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS rustapi/includes/proto/rustplus.proto)
+protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS rustapi/rustapi.proto)
 
 add_executable(glad2see
     data/database.cpp

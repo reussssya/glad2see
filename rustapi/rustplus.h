@@ -1,5 +1,5 @@
 #pragma once
-#include "includes/proto/rustplus.pb.h"
+#include "includes/proto/rustapi.pb.h"
 
 // websockets
 #include "includes/easyws/easywsclient.hpp"
@@ -10,9 +10,9 @@
 #include <vector>
 #include <cstdlib>
 #include <Windows.h>
-#include <sys/types.h>
 
 using namespace easywsclient;
+
 using namespace rustplus;
 
 class RustPlusSocket
@@ -49,20 +49,16 @@ public:
         ws = nullptr;
         delete ws;
     }
-    AppRequest initProto();
-
-    void connect()
-    {
-        
-    }
+    rustplus::AppRequest initProto();
     
     void sendTeamMessage(const char* message);
-    AppTeamChat getMessagesFromTeamChat(bool bLastMsg);
-    AppTime getTime();
+    rustplus::AppTeamChat getMessagesFromTeamChat();
+    rustplus::AppTime getTime();
+
+    WebSocket::pointer ws = nullptr;
 private:
 
     std::string url = "ws://";
-    WebSocket::pointer ws = nullptr;
 
     uint64_t uSteamId;
     int32_t iPlayerToken;
