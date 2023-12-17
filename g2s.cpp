@@ -51,6 +51,7 @@ QString Cg2sStyle::getCloseStyleSheet()
            "background-color:" BTN_COLOR_GREY ";"
            "}";
 }
+
  
 QString Cg2sStyle::getMaximizeStyleSheet()
 {
