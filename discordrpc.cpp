@@ -4,7 +4,7 @@ int DiscordRPC::Start()
 {
     auto result = discord::Core::Create(1152688746400075876, DiscordCreateFlags_Default, &core);
     state.core.reset(core);
-
+    
 
     //m_bIsPlaying = true
     char szMusic[64] = "24 - Money Man";
@@ -26,7 +26,7 @@ int DiscordRPC::Start()
         activity.SetState("");
 
     }
-    activity.GetAssets().SetLargeImage("icon_512");
+    activity.GetAssets().SetLargeImage("https://media1.tenor.com/m/Q823-830Ri0AAAAd/christian-bale-american-psycho.gif");
     activity.GetAssets().SetLargeText("Аналог Spotify без VPN");
     activity.SetType(discord::ActivityType::Listening);
     state.core->ActivityManager().UpdateActivity(activity, [](discord::Result result) {});
@@ -34,7 +34,7 @@ int DiscordRPC::Start()
     do { 
         MusicActivityUpdate();
         state.core->RunCallbacks();
-
+        std::cout << "peppa";
         std::this_thread::sleep_for(std::chrono::milliseconds(1000u));
     } while (!interrupted);
     return 0;

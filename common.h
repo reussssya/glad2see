@@ -4,50 +4,17 @@
 #include <Windows.h>
 #include <sys/types.h>
 #include <vector>
+#include <iostream>
+#include <thread>
 
-#include <QTableView>
-#include <QStandardItemModel>
-#include <QToolButton>
-#include <QScreen>
-#include <QString>
-#include <QSize>
-#include <QDebug>
-#include <QMessageBox>
-#include <QLabel>
-#include <QWindow>
-#include <QWidget>
-#include <QLineEdit>
-#include <QGridLayout>
-#include <QPushButton>
-#include <QApplication>
-#include <QListWidget>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QtSql>
-#include <QThread>
-#include <QCloseEvent>
-#include <QSettings>
-#include <QProgressBar>
-#include <QSlider>
-#include <QPixmap>
-#include <QPainterPath>
-#include <QQuickView>
-#include <QStringLiteral>
-#include <QSystemTrayIcon>
-#include <QAction>
-#include <QDesktopServices>
+#include "vendor/imgui/imgui.h"
+#include "vendor/imgui/imgui_impl_opengl3.h"
+#include "vendor/imgui/imgui_impl_win32.h"
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 
-#include <QMenu>
-#include <QtMultimedia/QMediaPlaylist>
-#include <QtMultimedia/QMediaPlayer>
-#include <QStringList>
-#include <QPalette>
-#include <QKeyEvent>
-#include <QTimer>
-#include <QFileDialog>
-
-
+#endif
 #define DEBUG_C
 
-inline QString gLogin;
+inline std::string gLogin;
 inline int gSubscripted, gSubtime;

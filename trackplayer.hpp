@@ -29,21 +29,19 @@ public:
     }
     void setAvatar(std::string path)
     {
-        avatar->load(QString::fromStdString(path));
+        
     }
 private:
     std::string name;
     std::string info;
-    QPixmap* avatar;
 
     bool m_bDisplay = true;
 };
 
-class CTrackPlayer : public QWidget
+class CTrackPlayer 
 {
-    Q_OBJECT
 public:
-    CTrackPlayer(QWidget *parent = nullptr);
+    CTrackPlayer();
     ~CTrackPlayer();
 
     void InitArtists();
@@ -62,17 +60,6 @@ public:
         this->volume = volume;
     }
     
-    QMediaPlayer *pMediaPlayer;
-
-    //QMediaPlaylist *pMediaPlaylist;
-
-    QToolButton* btnPlay = new QToolButton(this);
-    QToolButton* btnNext = new QToolButton(this);
-    QToolButton* btnPrevious = new QToolButton(this);
-    QToolButton* btnFavourite = new QToolButton(this);
-    QToolButton* btnVolume = new QToolButton(this);
-    QToolButton* btnRepeat = new QToolButton(this);
-    QToolButton* btnRandom = new QToolButton(this);
 private:
 
     //example view (have to make remote get songs (from web-server) using JSON or Protobuf)
@@ -90,15 +77,6 @@ private:
     unsigned int volume = 40;
 
     std::vector<Artist> artists;
-
-public slots:
-    void clicked_onPlay();
-    void clicked_onNext();
-    void clicked_onPrevious();
-    void clicked_onFavourite();
-    void clicked_onVolume();
-    void clicked_onRepeat();
-    void clicked_onRandom();
 
 
 };

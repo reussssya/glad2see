@@ -3,18 +3,20 @@
 
 CDatabase::CDatabase()
 {
-    db.setHostName("127.0.0.1");
-    db.setUserName("root");
-    db.setPassword("");
-    db.setDatabaseName("glad2see");
+    sql::Driver *driver;
+    sql::Connection* conn;
+    driver = get_driver_instance();
+    conn = driver->connect("tcp://127.0.0.1", "root", "");
+    //conn->setSchema("g2s");
     
-    if(db.open())
+    
+    if(true) //con is ok
     {
-        qDebug() << "Connected to database!";
+        std::cout << "Connected to database!";
     }
     else
     {
-        qDebug() << "Error! Try again... Can't connect to server :(";
+        std::cout << "Error! Try again... Can't connect to server :(";
         // have to close the window and popup window with error connecting to db
         std::terminate();
     }
@@ -22,5 +24,5 @@ CDatabase::CDatabase()
 
 CDatabase::~CDatabase()
 {
-    
+    delete this;
 }
