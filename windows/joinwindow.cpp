@@ -1,5 +1,6 @@
-#include "joinwindow.h"
 #include "../data/database.h"
+#include "joinwindow.h"
+
 
 
 #define         JOINWND_W_SIZE          400
