@@ -34,7 +34,7 @@ int DiscordRPC::Start()
     do { 
         MusicActivityUpdate();
         state.core->RunCallbacks();
-        std::cout << "peppa";
+        
         std::this_thread::sleep_for(std::chrono::milliseconds(1000u));
     } while (!interrupted);
     return 0;
