@@ -1,7 +1,14 @@
 # glad2see - no more Spotify needed
 ## Dependencies
-- Qt5 (5.15.3 in my case) and dlls from Qt5
 - discord_game_sdk.dll
-- CMake 
+- CMake & Conan 
 - Inter Black (900) Font 
-- Hands and brains
+
+
+1. First of all install and build with conan dependencies such as:
+--- libmysqlclient
+
+Usage:
+'''conan install . --output-folder=build --build=missing
+'''conan build . --output-folder=./build
+'''
