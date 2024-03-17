@@ -1,7 +1,5 @@
 build/
 .vscode/
-windows/mainwindow.ui
-tests/
 .gitconfig
-newdesign/main.qml
-todo.txt
+CMakeUserPresets.json
+songs/
