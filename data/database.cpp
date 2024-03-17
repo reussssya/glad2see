@@ -3,26 +3,29 @@
 
 CDatabase::CDatabase()
 {
-    sql::Driver *driver;
-    sql::Connection* conn;
-    driver = get_driver_instance();
-    conn = driver->connect("tcp://127.0.0.1", "root", "");
-    //conn->setSchema("g2s");
-    
-    
-    if(true) //con is ok
-    {
-        std::cout << "Connected to database!";
-    }
-    else
-    {
-        std::cout << "Error! Try again... Can't connect to server :(";
-        // have to close the window and popup window with error connecting to db
-        std::terminate();
-    }
+    Connect();
 }
+void CDatabase::Connect()
+{
+    conn = mysql_init(NULL);
 
+    if(mysql_real_connect(conn, "localhost", "root", "", "glad2see", 0, NULL, 0))
+    {
+        //std::cout << "Connected to glad2see" << std::endl;
+        if(mysql_select_db(conn, "users"))
+        {
+            //  std::cout << "Connected to users' database" << std::endl;
+            bConnected = true;
+        }
+        else
+        {
+            //std::cout << "Can't connect to database" << std::endl;
+        }
+    }
+    
+
+}
 CDatabase::~CDatabase()
 {
-    delete this;
+    mysql_close(conn);
 }

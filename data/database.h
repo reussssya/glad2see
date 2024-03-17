@@ -1,16 +1,17 @@
 #pragma once
 
-#include "../common.h"
-#include "../vendor/mysql-connector/include/jdbc/mysql_connection.h"
-#include "../vendor/mysql-connector/include/jdbc/cppconn/driver.h"
+#include <mysql.h>
 class CDatabase
 {
 
 public:
     CDatabase();
     ~CDatabase();
-
+    void Connect();
     
 private:
-    
+    MYSQL *conn;
+    MYSQL_RES *res;
+    MYSQL_ROW row;
+    bool bConnected = false;
 };
