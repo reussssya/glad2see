@@ -1,9 +1,11 @@
 #pragma once
 
+
+
 #include "../common.h"
 #include "joinwindow.h"
 #include "../trackplayer.hpp"
-#include <windowsx.h>
+
 class CMainWindow
 {
 public:
