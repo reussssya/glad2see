@@ -11,20 +11,26 @@ void CDatabase::Connect()
 
     if(mysql_real_connect(conn, "localhost", "root", "", "glad2see", 0, NULL, 0))
     {
-        //std::cout << "Connected to glad2see" << std::endl;
+        spdlog::info("Connected to server");
         if(mysql_select_db(conn, "users"))
         {
-            //  std::cout << "Connected to users' database" << std::endl;
+            spdlog::info("Connected to database");
             bConnected = true;
         }
         else
         {
-            //std::cout << "Can't connect to database" << std::endl;
+            spdlog::info("Can't connect to database");
         }
     }
+    else
+    {
+        spdlog::info("Can't connect to server");
+    }
+
     
 
 }
+
 CDatabase::~CDatabase()
 {
     mysql_close(conn);

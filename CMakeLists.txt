@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.15)
 project(glad2see)
-
 set(vendor ${PROJECT_SOURCE_DIR}/vendor)
 set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 find_package(libmysqlclient REQUIRED)
+find_package(spdlog REQUIRED)
 
 file(GLOB discord "discordrpc.cpp" 
     "discordrpc.h" 
@@ -35,11 +35,14 @@ add_executable(glad2see
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_17)
 target_include_directories(${PROJECT_NAME} PUBLIC 
     ${PROJECT_SOURCE_DIR}/vendor/discord-rpc/include
+    ${PROJECT_SOURCE_DIR}/vendor/glfw/include
 )
 
 target_link_libraries(${PROJECT_NAME} OpenGL32 
-    ${PROJECT_SOURCE_DIR}/vendor/discord-rpc/lib/x86_64/discord_game_sdk.dll.lib 
+    ${PROJECT_SOURCE_DIR}/vendor/discord-rpc/lib/x86_64/discord_game_sdk.dll.lib
+    ${PROJECT_SOURCE_DIR}/vendor/glfw/lib-vc2010-64/glfw3.lib
     libmysqlclient::libmysqlclient
+    spdlog::spdlog
 )
 add_custom_command(TARGET glad2see
     POST_BUILD

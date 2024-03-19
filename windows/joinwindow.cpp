@@ -8,6 +8,8 @@
 
 void CJoinWindow::clicked_onJoin()
 {
+    //CDatabase db;
+    //unsigned id = db.makeQuery<unsigned int>("SELECT id FROM users WHERE name = 'sdfs'", 0); //login
     /*
     QSqlQuery q;
     q.prepare("SELECT id FROM users WHERE name = :name");

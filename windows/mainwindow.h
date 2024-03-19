@@ -1,7 +1,7 @@
 #pragma once
 
 
-
+#include "../data/database.h"
 #include "../common.h"
 #include "joinwindow.h"
 #include "../trackplayer.hpp"
@@ -14,8 +14,8 @@ public:
 
     bool bSubscriptionCheck();
     void applyCustomStyleSheet();
-    
-    void show() {}
+
+    void show();
     void hide() {}
     const std::string title = "glad2see";
     
@@ -26,8 +26,6 @@ public:
     
 private:
     CJoinWindow *pJoinWindow;
-    
-    
-
+    GLFWwindow* main;
     
 };

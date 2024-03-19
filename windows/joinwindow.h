@@ -7,11 +7,15 @@ class CJoinWindow
 public:
     CJoinWindow();
     ~CJoinWindow();
-
-private:
+    void show() {
+        spdlog::info("opened CJoinWindow");
+    }
+    void hide() {
+        spdlog::info("closed CJoinWindow");
+    }
+protected:
     void applyCustomDesign();
-    void show() {}
-    void hide() {}
+
     void clicked_onJoin();
     std::vector<std::string> labels {
         "glad2see - join with us",
