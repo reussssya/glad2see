@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/img/joinButton.png</file>
+        <file>data/img/joinButtonFinal.png</file>
+        <file>data/img/joinButtonFinalPressed.png</file>
+        <file>data/img/joinWindow.png</file>
+        <file>data/img/leCode.png</file>
+        <file>data/img/leUsername.png</file>
+        <file>data/img/mainWindow.png</file>
+        <file>data/img/quitButton.png</file>
+        <file>data/img/quitButtonFinal.png</file>
+        <file>data/img/quitButtonFinalPressed.png</file>
+        <file>data/img/buildLabel.png</file>
+        <file>data/img/joinWithUsLabel.png</file>
+        <file>data/img/identificatorLabel.png</file>
+        <file>data/img/codeLabel.png</file>
+        <file>data/img/regIcon.png</file>
+        <file>data/img/mainIcon.png</file>
+        <file>data/img/trayIcon.ico</file>
+        <file>data/img/icon.ico</file>
+        <file>data/img/bottomLine.png</file>
+        <file>data/img/tBtnClose.png</file>
+        <file>data/img/tBtnClosePressed.png</file>
+        <file>data/img/tBtnMinimize.png</file>
+        <file>data/img/tBtnMaximize.png</file>
+        <file>data/img/tBtnMinimizePressed.png</file>
+        <file>data/img/tBtnMaximizePressed.png</file>
+    </qresource>
+</RCC>

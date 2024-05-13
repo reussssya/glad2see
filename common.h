@@ -10,12 +10,40 @@
 
 #include <spdlog/spdlog.h>
 
-#include "vendor/xorstr.hpp"
-#include "vendor/imgui/imgui.h"
-#include "vendor/imgui/imgui_impl_glfw.h"
-#include "vendor/imgui/imgui_impl_opengl3.h"
-#include <GLFW/glfw3.h>
+#include <QTableView>
+#include <QStandardItemModel>
+#include <QToolButton>
+#include <QScreen>
+#include <QString>
+#include <QSize>
+#include <QDebug>
+#include <QMessageBox>
+#include <QLabel>
+#include <QWindow>
+#include <QWidget>
+#include <QLineEdit>
+#include <QGridLayout>
+#include <QPushButton>
+#include <QApplication>
+#include <QListWidget>
+#include <QThread>
+#include <QCloseEvent>
+#include <QSettings>
+#include <QProgressBar>
+#include <QSlider>
+#include <QPixmap>
+#include <QPainterPath>
+#include <QStringLiteral>
+#include <QSystemTrayIcon>
+#include <QAction>
+#include <QDesktopServices>
 
+#include <QMenu>
+#include <QStringList>
+#include <QPalette>
+#include <QKeyEvent>
+#include <QTimer>
+#include <QFileDialog>
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -30,8 +58,11 @@
 inline std::string gLogin;
 inline int gSubscripted, gSubtime;
 
-inline wchar_t* regKeyPath = L"Software\\glad2see";
-
+static int defaultButtonSizeX = 50;
+static int defaultButtonSizeY = 14;
+static int defaultFontSize = 14;
+//inline wchar_t regKeyPath = L"Software\\glad2see";
+/*
 static bool EnsureRegistryKey(const wchar_t* path)
 {
     HKEY hKey;
@@ -41,4 +72,4 @@ static bool EnsureRegistryKey(const wchar_t* path)
     } else {
         return RegCreateKeyEx(HKEY_CURRENT_USER, LPCSTR(path), 0, nullptr, REG_OPTION_NON_VOLATILE, KEY_WRITE, nullptr, &hKey, nullptr) == ERROR_SUCCESS;
     }
-}
+}*/

@@ -1,20 +1,19 @@
-#define GL_SILENCE_DEPRECATION
+#include "../data/database.h"
 #include "mainwindow.h"
-#include <imgui/styles/imgui_itamago.h>
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1900) && !defined(IMGUI_DISABLE_WIN32_FUNCTIONS)
-#pragma comment(lib, "legacy_stdio_definitions")
-#endif
+#include "../g2s.h"
 bool CMainWindow::bSubscriptionCheck()
 {
     time_t currentTime = time(0);
+    
     CDatabase db;
     time_t reg = db.makeQuery<time_t>("SELECT UNIX_TIMESTAMP(subscripted) FROM users WHERE name = 'asd'", 0); // login
-    spdlog::info("reg info: {}", reg);
+    
+    
+    spdlog::info(reg);
 
-    time_t expreg = db.makeQuery<time_t>("SELECT UNIX_TIMESTAMP(subtime) FROM users WHERE name = 'asd'", 0); // login
+    time_t expreg = db.makeQuery<time_t>("SELECT UNIX_TIMESTAMP(subtime) FROM users WHERE name = 'asd'", 0);
     bool bExpired = (currentTime > reg+expreg ? true : false);
-    spdlog::info("ok");
+    spdlog::info("Is ok");
     return bExpired;
 }
 
@@ -23,130 +22,96 @@ bool CMainWindow::bSubscriptionCheck()
 void CMainWindow::applyCustomStyleSheet()
 {
 
+    this->setWindowIcon(QIcon(":/data/img/mainIcon.png"));
     
-    // Setup Dear ImGui style
-    ImGui::StyleColorsItamago(true, 0.95f);
-    //ImGui::StyleColorsLight();
-    //this->setWindowIcon(QIcon(":/data/img/mainIcon.png"));
-    
-
-    
-    
+    //QSlider slider;
 }
-CMainWindow::CMainWindow()
+
+CMainWindow::CMainWindow(QWidget *parent) : QWidget(parent)
 {
-    if (!glfwInit())
-        spdlog::info("Failed to initialize GLFW");
-
-
-    const char* glsl_version = "#version 130";
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    main = glfwCreateWindow(800, 600, "Custom bar", nullptr, nullptr);
-
-    if (main == nullptr)
-        spdlog::info("windows nullptr");
-
-    glfwMakeContextCurrent(main);
-    glfwSwapInterval(1); // Enable vsync
-
-    
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); 
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;   
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;     
-    
-
-
-    applyCustomStyleSheet();
-
-    
-    ImGui_ImplGlfw_InitForOpenGL(main, true);
-
-    ImGui_ImplOpenGL3_Init(glsl_version);
-    ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-    
-
-    while (!glfwWindowShouldClose(main))
-    {
-        glfwPollEvents();
-
-        
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        static float f = 0.0f;
-        static int counter = 0;
-
-        ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
-
-        ImGui::Text("This is some useful text.");                
-
-        ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-        ImGui::ColorEdit3("clear color", (float*)&clear_color); // Edit 3 floats representing a color
-
-        if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-            counter++;
-        ImGui::SameLine();
-        ImGui::Text("counter = %d", counter);
-
-        ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-        ImGui::End();
-        
-
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(main, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w, clear_color.w);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        
-        glfwSwapBuffers(main);
-    }
-
-
     pJoinWindow = new CJoinWindow();
+    hLayout = new QHBoxLayout(parent);
+    tBtnExit = new QToolButton();
+    tBtnMaximize = new QToolButton();
+    tBtnMinimize = new QToolButton();
+    // rounding window's corners
     
+    this->setWindowFlags(flags);
+    
+    
+    this->setBaseSize(1280, 720);
+    //this->resize(width() - (width() * 0.15), height() - (height() * 0.15));
+    this->setMinimumSize(width() - (width() * 0.60), height() - (height() * 0.60));
+
     applyCustomStyleSheet();
-    
-    if(!EnsureRegistryKey(regKeyPath))
+
+    if(!qs->value("bIsAuthed").toBool())
     {
         this->hide();
-
+        
+        
+        connect(pJoinWindow, &CJoinWindow::exec_mainWindow, this, &CMainWindow::show);
         pJoinWindow->show();
     }
-    else if(bSubscriptionCheck())
+    else if(!bSubscriptionCheck())
     {
-        // podpiska istekla
         this->hide();
         
         pJoinWindow->show();
+        connect(pJoinWindow, &CJoinWindow::exec_mainWindow, this, &CMainWindow::show);
+        QMessageBox::information(this, "Ваша подписка истекла", "Хотите продолжить пользоваться снова? :3\nОбратитесь сюда: vk.com/reussssya или t.me/amireusya");
     }
     else
     {
-        this->show();
+        show();
+
+        QHBoxLayout *layout = new QHBoxLayout(this);
+
+        // Создаем пустой виджет с фиксированным размером до кнопки
+        QWidget *spacerBefore = new QWidget(this);
+        spacerBefore->setFixedWidth(100);
+
+        // Создаем пустой виджет с фиксированным размером после кнопки
+        QWidget *spacerAfter = new QWidget(this);
+        spacerAfter->setFixedWidth(100);
+        QPushButton* btn = new QPushButton("Open", this);
+        
+        btn->setStyleSheet(Cg2sStyle::getPushButtonStyleSheet());
+        btn->setFixedSize(defaultButtonSizeX, defaultButtonSizeY);
+
+        connect(btn, &QPushButton::released, this, &CMainWindow::showMaximized);
+
+        layout->addWidget(spacerBefore);
+        layout->addWidget(btn);
+        layout->addWidget(spacerAfter);
+        setLayout(hLayout);
+        
+        
+    }
+
+}
+
+
+void CMainWindow::clicked_onMaximize()
+{
+    if(!m_bIsMaximized)
+    {
+        this->showFullScreen();
+        this->showMaximized();
+        m_bIsMaximized = true;
+        
+    }
+    else
+    {
+        this->resize(width() - (width() * 0.50), height() - (height() * 0.50));
+        this->move(width() - (width() * 0.90), height()- (height() * 0.90));
+        this->showNormal();
+        m_bIsMaximized = false;
     }
 }
 
-void CMainWindow::show()
-{
-    
-
-}
 
 CMainWindow::~CMainWindow()
 {
-     // Cleanup
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
-    glfwDestroyWindow(main);
-    glfwTerminate();
-
-    delete this;
+    QApplication::quit();
 }

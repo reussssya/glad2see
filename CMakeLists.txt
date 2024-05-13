@@ -1,29 +1,37 @@
 cmake_minimum_required(VERSION 3.15)
 project(glad2see)
+
 set(vendor ${PROJECT_SOURCE_DIR}/vendor)
-set(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_CXX_STANDARD 17)
+#set(CMAKE_BUILD_TYPE "Release")
+
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+set(CMAKE_AUTOMOC ON)
+
 find_package(libmysqlclient REQUIRED)
 find_package(spdlog REQUIRED)
 
+find_package(Qt6 COMPONENTS Core Widgets)
+qt6_add_resources(QT_RESOURCES resources.qrc)
 file(GLOB discord "discordrpc.cpp" 
     "discordrpc.h" 
     "vendor/discord-rpc/include/*.cpp" 
     "vendor/discord-rpc/include/*.h"
 )
 file(GLOB windows "windows/*.cpp" "windows/*.h")
-file(GLOB imgui   "vendor/imgui/*.cpp" "vendor/imgui/*.h")
 file(GLOB db "data/*.cpp" "data/*.h")
 file(GLOB player "trackplayer.cpp" "trackplayer.h")
 include_directories(${vendor})
 
 add_executable(glad2see
     #WIN32
-    ${imgui}
+    ${QT_RESOURCES}
+    data/img/trayIcon.ico
+    resources.rc
     ${db}
     ${windows}
     main.cpp
+    g2s.cpp
+    g2s.h
     ${discord}
     ${player}
     
@@ -40,9 +48,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 
 target_link_libraries(${PROJECT_NAME} OpenGL32 
     ${PROJECT_SOURCE_DIR}/vendor/discord-rpc/lib/x86_64/discord_game_sdk.dll.lib
-    ${PROJECT_SOURCE_DIR}/vendor/glfw/lib-vc2010-64/glfw3.lib
     libmysqlclient::libmysqlclient
     spdlog::spdlog
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::QWindowsIntegrationPlugin
 )
 add_custom_command(TARGET glad2see
     POST_BUILD
